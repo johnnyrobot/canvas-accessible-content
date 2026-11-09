@@ -37,7 +37,8 @@ text is too light", find out *which* text actually fails:
 python3 scripts/contrast.py /tmp/page.html
 ```
 
-The script prints every text run with its computed ratio. Fix what it reports. If it
+The script prints every text run with its computed ratio. For heading order, run
+`python3 scripts/headings.py /tmp/page.html`. Fix what it reports. If it
 reports nothing and the user still sees a problem, the cause is Canvas's theme or the
 page chrome, not the page body — say so and ask which element they mean rather than
 editing at random.
@@ -49,7 +50,7 @@ editing at random.
 nest the JSON under the resource key. See `references/cli-workflow.md`.
 
 **5. Verify all three ways.** Re-read the stored body to see what the sanitizer kept,
-re-run the contrast check on what came back, and **look at the rendered page**. Report
+re-run the contrast and heading checks on what came back, and **look at the rendered page**. Report
 success only after step 5.
 
 ## Non-negotiables
@@ -78,6 +79,10 @@ reached the page.
 | Using `--compact` to fetch a body | The body field is stripped | `--json --no-cache`, read `.results.body` |
 | Adding a `<style>` block | Canvas strips it entirely | Inline `style` attributes only |
 | Assuming the DOM color is what paints | `opacity`, `filter`, and `-webkit-text-fill-color` override it | Screenshot it |
+| Inline white text on a card whose dark background comes from a theme class | Ally scores it white on white; the text vanishes in its preview | Put the background inline too, or drop the color |
+| Writing accordion or answer-choice headings as `<h5>` under an `<h3>` | Ally flags heading order on every such page | Level from position (`<h4>`); keep the class; run `headings.py` |
+| Marking the current menu item with `aria-current` | Canvas strips it | Add ", current page" to the link's `aria-label` |
+| Marking an image decorative in Canvas and expecting Ally to clear it | Ally scores image files on their own and still flags it | Choose "Indicate image is decorative" in Ally, or delete unused files |
 
 ## Red flags — stop
 
@@ -95,4 +100,6 @@ reached the page.
 | `references/html-allowlist.md` | Tags, attributes, protocols, and style properties Canvas keeps |
 | `references/templates.md` | 8 ready page templates + brand color rules |
 | `references/cli-workflow.md` | Verified `canvas-pp-cli` read/write/verify commands |
+| `references/ally.md` | What Anthology Ally flags, why, and what clears each issue |
 | `scripts/contrast.py` | WCAG AA contrast checker; exit 1 on any failure |
+| `scripts/headings.py` | Heading-outline checker (no `<h1>`, no skipped levels); exit 1 on any problem |

@@ -62,6 +62,11 @@ mtable, mtd, mtext, mtr, munder, munderover, none, semantics, mark
 | `ul` | `type` |
 | `video` | `name`, `src`, `allowfullscreen`, `muted`, `poster`, `width`, `height`, `controls`, `playsinline` |
 
+`aria-current` is **not** on the list, and Canvas strips it from stored HTML.
+`aria-label` is kept. To mark the current page in a page menu, put it in the link's
+name, starting with the visible text: `aria-label="Lesson 2: Checking Sources, current
+page"`. Or say it in visible text ("You are here").
+
 `scope` is on `th` only. That is the attribute that makes a data table readable by a
 screen reader, and it is the one most often dropped.
 

@@ -8,6 +8,13 @@ The normative rules for Canvas page content. Target is **WCAG 2.1 Level AA**.
   the document outline. It is also absent from the tag allowlist.
 - **Headings start at `<h2>`**, then `<h3>`, `<h4>` in order. Never skip a level to get
   a font size.
+- **Headings inside components count.** Accordion panel headings, card titles, tab
+  labels, and answer choices written as headings sit in the page outline like any
+  other. Choose their level from where they sit: under an `<h3>` section they are
+  `<h4>`, never `<h5>`. Keep the component's class, which is what its script uses.
+  Check with `python3 scripts/headings.py page.html`.
+- **Headings pasted from other tools** (Rise, Word, Google Docs) can sit mid-block at
+  the wrong level. Fix the level or make them bold text.
 - **No document-structure elements.** No `<!DOCTYPE>`, `<html>`, `<head>`, `<body>`.
   A page body is a fragment.
 - **No stylesheets.** Inline `style` attributes only — see `html-allowlist.md` for why
@@ -23,6 +30,10 @@ The normative rules for Canvas page content. Target is **WCAG 2.1 Level AA**.
 - Keep existing color coding when editing — darken or lighten to reach the ratio rather
   than flattening everything to black.
 - Never use color alone to carry meaning.
+- **Never color text for a background you did not set inline.** If a card, banner, or
+  accordion gets its dark background from the theme or a class, inline light text on
+  it is scored as light on white by checkers such as Ally, which cannot see the theme.
+  Either put the background inline beside the color, or leave the color off.
 
 Measure, do not estimate:
 

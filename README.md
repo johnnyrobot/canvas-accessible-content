@@ -49,7 +49,22 @@ install step, no dependencies.
 | `references/html-allowlist.md` | Tags, attributes, protocols, and style properties Canvas keeps |
 | `references/templates.md` | 8 ready page templates + brand color rules |
 | `references/cli-workflow.md` | Verified `canvas-pp-cli` read/write/verify commands |
+| `references/ally.md` | What Anthology Ally flags, why, and what clears each issue |
 | `scripts/contrast.py` | WCAG AA contrast checker; exits 1 on any failure |
+| `scripts/headings.py` | Heading-outline checker: no `<h1>` in the body, no skipped levels; exits 1 on any problem |
+
+## The heading checker
+
+Ally and screen readers read headings inside components (accordion panels, card titles,
+answer choices) as part of the page outline. `headings.py` lists every skip:
+
+```bash
+python3 scripts/headings.py page.html
+```
+
+```
+FAIL  line 1: <h5> after <h3> skips a level. "Netflix recommends a show from your history"
+```
 
 ## The contrast checker
 
