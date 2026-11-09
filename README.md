@@ -51,7 +51,9 @@ install step, no dependencies.
 | `references/cli-workflow.md` | Verified `canvas-pp-cli` read/write/verify commands |
 | `references/ally.md` | What Anthology Ally flags, why, and what clears each issue |
 | `scripts/contrast.py` | WCAG AA contrast checker; exits 1 on any failure |
+| `references/udoit.md` | What UDOIT flags, why, and what clears each issue |
 | `scripts/headings.py` | Heading-outline checker: no `<h1>` in the body, no skipped levels; exits 1 on any problem |
+| `scripts/udoit_check.py` | Pre-scan for UDOIT's common findings, calibrated against a live scan; exits 1 on any |
 
 ## The heading checker
 
@@ -65,6 +67,20 @@ python3 scripts/headings.py page.html
 ```
 FAIL  line 1: <h5> after <h3> skips a level. "Netflix recommends a show from your history"
 ```
+
+## The UDOIT pre-scan
+
+UDOIT's biggest number on hand-built pages is usually "Potential use of color alone",
+one per paragraph that repeats an inline text color. `udoit_check.py` models UDOIT's
+rules so a page can be fixed before it is scanned:
+
+```bash
+python3 scripts/udoit_check.py --summary pages/*.html
+python3 scripts/udoit_check.py page.html          # every finding, with line and text
+```
+
+The color rule is calibrated against a live scan, not copied from source; it ran a
+little strict on decorative number badges. See `references/udoit.md`.
 
 ## The contrast checker
 

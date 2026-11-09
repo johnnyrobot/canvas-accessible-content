@@ -89,6 +89,9 @@ position, right, text-align, table-layout, text-decoration, text-indent, top,
 vertical-align, visibility, white-space, width, z-index, zoom
 ```
 
+Note: an inline `font-weight` was stripped when pages were saved to a Canvas instance,
+so do not rely on it to make text bold or to satisfy a checker. Use `<strong>`.
+
 ### The `style` tension, resolved
 
 `style-rules.md` says not to add CSS. This allowlist permits `style` on every element,

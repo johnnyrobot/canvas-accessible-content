@@ -30,6 +30,10 @@ The normative rules for Canvas page content. Target is **WCAG 2.1 Level AA**.
 - Keep existing color coding when editing — darken or lighten to reach the ratio rather
   than flattening everything to black.
 - Never use color alone to carry meaning.
+- **Set a text color once, on a wrapper.** Paragraphs, list items and headings inherit
+  it. Repeating the same inline `color` on every paragraph reads as "color alone" to
+  UDOIT, once per paragraph. Colored text that must stand out also gets a non-color
+  cue: `<strong>`, an icon with text, or wording.
 - **Never color text for a background you did not set inline.** If a card, banner, or
   accordion gets its dark background from the theme or a class, inline light text on
   it is scored as light on white by checkers such as Ally, which cannot see the theme.
@@ -55,13 +59,15 @@ dark enough" routinely lands at 3.9:1.
 ## Links
 
 - Link text describes its destination. Never "click here", "read more", or a bare URL.
+- In a sources or references list, the citation is the link text. A URL as its own
+  link text is "nondescript" to UDOIT.
 - Write URLs as natural descriptive text: `<a href="...">How do I submit an
   assignment?</a>`, not `<a href="...">https://...</a>`.
 - External links: `target="_blank" rel="noopener"`.
 
 ## Images
 
-- Every image needs `alt`. Keep it under 80 characters (the templates' own guidance
+- Every image needs `alt`. UDOIT flags anything over 150 characters. Keep it under 80 characters (the templates' own guidance
   says under 120; use 80 as the working limit and never exceed 120).
 - `alt` describes content or function, not "image of".
 - An image whose existing alt text reads `decorative` gets `alt=""` — do not write

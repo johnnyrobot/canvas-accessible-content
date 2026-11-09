@@ -38,7 +38,8 @@ python3 scripts/contrast.py /tmp/page.html
 ```
 
 The script prints every text run with its computed ratio. For heading order, run
-`python3 scripts/headings.py /tmp/page.html`. Fix what it reports. If it
+`python3 scripts/headings.py /tmp/page.html`. Before a course import or a UDOIT scan,
+run `python3 scripts/udoit_check.py --summary pages/*.html`. Fix what it reports. If it
 reports nothing and the user still sees a problem, the cause is Canvas's theme or the
 page chrome, not the page body — say so and ask which element they mean rather than
 editing at random.
@@ -83,6 +84,9 @@ reached the page.
 | Writing accordion or answer-choice headings as `<h5>` under an `<h3>` | Ally flags heading order on every such page | Level from position (`<h4>`); keep the class; run `headings.py` |
 | Marking the current menu item with `aria-current` | Canvas strips it | Add ", current page" to the link's `aria-label` |
 | Marking an image decorative in Canvas and expecting Ally to clear it | Ally scores image files on their own and still flags it | Choose "Indicate image is decorative" in Ally, or delete unused files |
+| Repeating the text color inline on every paragraph | UDOIT reports "color alone" once per paragraph, hundreds per course | Set it once on a wrapper; drop inline colors equal to the inherited one |
+| Adding inline `font-weight` to satisfy a checker | Canvas strips it on save | Wrap the text in `<strong>` |
+| A URL as its own link text in a sources list | UDOIT: "Link has nondescript text" | Make the citation the link text |
 
 ## Red flags — stop
 
@@ -102,4 +106,6 @@ reached the page.
 | `references/cli-workflow.md` | Verified `canvas-pp-cli` read/write/verify commands |
 | `references/ally.md` | What Anthology Ally flags, why, and what clears each issue |
 | `scripts/contrast.py` | WCAG AA contrast checker; exit 1 on any failure |
+| `references/udoit.md` | What UDOIT flags, why, and what clears each issue |
 | `scripts/headings.py` | Heading-outline checker (no `<h1>`, no skipped levels); exit 1 on any problem |
+| `scripts/udoit_check.py` | Pre-scan for UDOIT's common findings (color alone, nondescript links, fake headings, skipped headings, long alt, long pages); exit 1 on any |
